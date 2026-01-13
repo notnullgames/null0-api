@@ -1,0 +1,42 @@
+<html>
+  <head>
+    <title>Null0</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        background: rgba(245, 245, 245, 255); /* RAYWHITE */
+        background: black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        overflow: hidden;
+      }
+
+      canvas {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+    </style>
+  </head>
+  <body>
+    <p>Not ready yet!</p>
+  </body>
+  <script type="importmap">
+    {
+      "imports": {
+        "@easywasm/wasi": "https://esm.sh/@easywasm/wasi",
+        "fflate": "https://esm.sh/fflate/esm/browser.js"
+      }
+    }
+  </script>
+  <script type="module">
+    // get list of carts
+    const carts = await fetch("carts/carts/txt")
+      .then((r) => r.text())
+      .then((t) => t.trim().split("\n"));
+    console.log(carts);
+  </script>
+</html>

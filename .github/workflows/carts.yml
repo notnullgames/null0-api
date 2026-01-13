@@ -24,6 +24,7 @@ jobs:
         with:
           name: ${{ matrix.cart }}_c
           path: ${{ matrix.cart }}_c.null0
+
   js:
     name: Build & Publish JS Carts
     runs-on: ubuntu-latest
@@ -42,6 +43,7 @@ jobs:
         with:
           name: ${{ matrix.cart }}_js
           path: ${{ matrix.cart }}_js.null0
+
   as:
     name: Build & Publish Assemblyscript Carts
     runs-on: ubuntu-latest
@@ -59,6 +61,7 @@ jobs:
         with:
           name: ${{ matrix.cart }}_as
           path: ${{ matrix.cart }}_as.null0
+
   nelua:
     name: Build & Publish Nelua Carts
     runs-on: ubuntu-latest
@@ -109,3 +112,34 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: artifacts/**/*.null0
+
+  deploy-pages:
+    name: Deploy to GitHub Pages
+    runs-on: ubuntu-latest
+    needs: [c, js, as, nelua]
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+      - name: Prepare Pages content
+        run: |
+          mkdir -p _site
+          cp -r demo/* _site/
+          cp -r artifacts/**/*.null0 _site/carts/
+          ls _site/carts/*.null0 > _site/carts/carts.txt
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
