@@ -77,6 +77,23 @@ jobs:
         with:
           name: ${{ matrix.cart }}_nelua
           path: ${{ matrix.cart }}_nelua.null0
+  # nim:
+  #   name: Build & Publish Nim Carts
+  #   runs-on: ubuntu-latest
+  #   strategy:
+  #     matrix:
+  #       cart:
+  #         - simple
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v4
+  #     - name: Build Nim ${{ matrix.cart }} cart
+  #       run: docker run -v ./carts/nim/${{ matrix.cart }}:/src -v .:/out konsumer/null0-cart-nim ${{ matrix.cart }}_nim
+  #     - name: Upload Nim ${{ matrix.cart }} cart artifact
+  #       uses: actions/upload-artifact@v4
+  #       with:
+  #         name: ${{ matrix.cart }}_nim
+  #         path: ${{ matrix.cart }}_nim.null0
 
   release:
     name: Create Release
