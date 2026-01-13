@@ -278,5 +278,5 @@ for (const [apiName, funcDef] of Object.entries(api)) {
   }
 }
 
-await mkdir("generated/host/src/", { recursive: true });
-await writeFile("generated/host/src/host.c", out.join("\n"));
+await mkdir("generated/host/", { recursive: true });
+await writeFile("generated/host/host.c", out.join("\n"));

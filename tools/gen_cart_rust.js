@@ -301,5 +301,5 @@ macro_rules! cstr {
 
 // Types are already public in this module, no need to re-export`);
 
-await mkdir("generated/carts/rust/src/", { recursive: true });
-await writeFile("generated/carts/rust/src/lib.rs", out.join("\n"));
+await mkdir("generated/carts/rust/", { recursive: true });
+await writeFile("generated/carts/rust/lib.rs", out.join("\n"));

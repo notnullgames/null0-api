@@ -1,6 +1,14 @@
-The idea here is a central place for some example-carts for [null0](https://github.com/notnullgames/null0), and the headers used to make them. I also use this as a place to store docker containers for building them.
+This repo contains various support-things for [null0](https://github.com/notnullgames/null0):
 
-- You will need docker installed to use these, which greatly simplifies your setup.
+- api definition
+- codegen for host
+- codegen for cart-headers for every supported language
+- example carts for every supported language
+- docker definitions for cart builders
+
+## to use this repo
+
+- You will need docker installed
 - volume-mount your cart in `/src`
 - volume-mount your output-dir in `/out`
 - the first param is the name of the cart
@@ -61,18 +69,39 @@ docker run --privileged --rm tonistiigi/binfmt --install all
 
 # generate headers (needed on API change)
 npm i
-npm run generate
+npm run gen
+
+# just local use (fast, no push)
+docker build -t konsumer/null0-cart-c . -f docker/null0-cart-c.Dockerfile
+docker build -t konsumer/null0-cart-quickjs . -f docker/null0-cart-quickjs.Dockerfile
+
+docker build -t konsumer/null0-cart-nelua . -f docker/null0-cart-nelua.Dockerfile
+docker build -t konsumer/null0-cart-assemblyscript . -f docker/null0-cart-assemblyscript.Dockerfile
+docker build -t konsumer/null0-cart-nim . -f docker/null0-cart-nim.Dockerfile
+docker build -t konsumer/null0-cart-zig . -f docker/null0-cart-zig.Dockerfile
+docker build -t konsumer/null0-cart-rust . -f docker/null0-cart-rust.Dockerfile
+docker build -t konsumer/null0-cart-py2wasm . -f docker/null0-cart-py2wasm.Dockerfile
 
 # build & publish (needed on API change)
-docker build  --push --platform linux/amd64,linux/arm64 -t konsumer/null0-cart-c docker -f docker/null0-cart-c.Dockerfile
-docker build  --push --platform linux/amd64,linux/arm64 -t konsumer/null0-cart-quickjs docker -f docker/null0-cart-quickjs.Dockerfile
-docker build  --push --platform linux/amd64,linux/arm64 -t konsumer/null0-cart-nelua docker -f docker/null0-cart-nelua.Dockerfile
-docker build  --push --platform linux/amd64,linux/arm64 -t konsumer/null0-cart-assemblyscript docker -f docker/null0-cart-assemblyscript.Dockerfile
-docker build  --push --platform linux/amd64,linux/arm64 -t konsumer/null0-cart-nim docker -f docker/null0-cart-nim.Dockerfile
-docker build  --push --platform linux/amd64,linux/arm64 -t konsumer/null0-cart-zig docker -f docker/null0-cart-zig.Dockerfile
-docker build  --push --platform linux/amd64,linux/arm64 -t konsumer/null0-cart-rust docker -f docker/null0-cart-rust.Dockerfile
-docker build  --push --platform linux/amd64,linux/arm64 -t konsumer/null0-cart-py2wasm docker -f docker/null0-cart-py2wasm.Dockerfile
+docker build  --push --platform linux/amd64,linux/arm64 -t konsumer/null0-cart-c . -f docker/null0-cart-c.Dockerfile
+docker build  --push --platform linux/amd64,linux/arm64 -t konsumer/null0-cart-quickjs . -f docker/null0-cart-quickjs.Dockerfile
+
+docker build  --push --platform linux/amd64,linux/arm64 -t konsumer/null0-cart-nelua . -f docker/null0-cart-nelua.Dockerfile
+docker build  --push --platform linux/amd64,linux/arm64 -t konsumer/null0-cart-assemblyscript . -f docker/null0-cart-assemblyscript.Dockerfile
+docker build  --push --platform linux/amd64,linux/arm64 -t konsumer/null0-cart-nim . -f docker/null0-cart-nim.Dockerfile
+docker build  --push --platform linux/amd64,linux/arm64 -t konsumer/null0-cart-zig . -f docker/null0-cart-zig.Dockerfile
+docker build  --push --platform linux/amd64,linux/arm64 -t konsumer/null0-cart-rust . -f docker/null0-cart-rust.Dockerfile
+docker build  --push --platform linux/amd64,linux/arm64 -t konsumer/null0-cart-py2wasm . -f docker/null0-cart-py2wasm.Dockerfile
 
 # test
-docker run -it -v ./carts/c/colorbars:/src -v ./out:/out konsumer/null0-cart-c colorbars
+docker run -it -v ./carts/c/colorbars:/src -v ./out:/out konsumer/null0-cart-c colorbars_c
+docker run -it -v ./carts/c/example:/src -v ./out:/out konsumer/null0-cart-c example_c
+docker run -it -v ./carts/c/gradient:/src -v ./out:/out konsumer/null0-cart-c gradient_c
+docker run -it -v ./carts/c/input:/src -v ./out:/out konsumer/null0-cart-c input_c
+docker run -it -v ./carts/c/sfx:/src -v ./out:/out konsumer/null0-cart-c sfx_c
+docker run -it -v ./carts/c/speak:/src -v ./out:/out konsumer/null0-cart-c speak_c
+docker run -it -v ./carts/c/wasi_demo:/src -v ./out:/out konsumer/null0-cart-c wasi_demo_c
+
+docker run -it -v ./carts/js/demo:/src -v ./out:/out konsumer/null0-cart-quickjs demo_js
+docker run -it -v ./carts/js/input:/src -v ./out:/out konsumer/null0-cart-quickjs input_js
 ```

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# this will compile a C cart for null0
+# this will assemble a QuickJS cart for null0
 
 # Check if all required arguments are provided
 if [ -z "${1}" ]; then
@@ -13,15 +13,10 @@ fi
 
 CART_NAME="${1}"
 
-export PATH="${PATH}:/opt/wasi-sdk/bin"
-
-echo "Compiling C cart from /src/ to /out/"
-clang --version
+echo "Compiling QuickJS cart from /src/ to /out/"
 
 mkdir -p "/tmp/${CART_NAME}"
 
-cp -R /src/* /src/.* "/tmp/${CART_NAME}/" 2>/dev/null
-cd "/tmp/${CART_NAME}/"
-clang -I /usr/local/include/ -o main.wasm main.c
+cp -R /src/* /src/.* /usr/local/lib/main.wasm "/tmp/${CART_NAME}/" 2>/dev/null
 
 /usr/local/bin/zipcart.sh "${CART_NAME}" "/tmp/${CART_NAME}/" /out

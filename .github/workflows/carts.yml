@@ -1,16 +1,44 @@
 on: push
 
 jobs:
-  build:
-    name: Build & Publish Cart
+  c:
+    name: Build & Publish C Carts
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        cart:
+          - colorbar
+          - example
+          - gradient
+          - input
+          - sfx
+          - speak
+          - wasi_demo
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Build C colorbars cart
-        run: docker run -v ./carts/c/colorbars:/src -v .:/out konsumer/null0-cart-c colorbars_c
-      - name: Upload C colorbars cart artifact
+      - name: Build C ${{ matrix.cart }} cart
+        run: docker run -v ./carts/c/${{ matrix.cart }}:/src -v .:/out konsumer/null0-cart-c ${{ matrix.cart }}_c
+      - name: Upload C ${{ matrix.cart }} cart artifact
         uses: actions/upload-artifact@v4
         with:
-          name: colorbars_c
-          path: colorbars_c.null0
+          name: ${{ matrix.cart }}_c
+          path: ${{ matrix.cart }}_c.null0
+  js:
+    name: Build & Publish JS Carts
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        cart:
+          - demo
+          - input
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Build JS ${{ matrix.cart }} cart
+        run: docker run -v ./carts/js/${{ matrix.cart }}:/src -v .:/out konsumer/null0-cart-quickjs ${{ matrix.cart }}_js
+      - name: Upload JS ${{ matrix.cart }} cart artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.cart }}_js
+          path: ${{ matrix.cart }}_js.null0

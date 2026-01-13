@@ -720,5 +720,5 @@ out.push("");
 add_consts();
 out.push("", ...funcs, "}");
 
-await mkdir("generated/carts/c/js", { recursive: true });
-await writeFile("generated/carts/c/js/main.c", out.join("\n"));
+await mkdir("generated/carts/c", { recursive: true });
+await writeFile("generated/carts/c/main_js.c", out.join("\n"));
