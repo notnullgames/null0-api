@@ -54,12 +54,14 @@ jobs:
 This is really just notes for me:
 
 ```sh
-# build
-docker build -t konsumer/null0-cart-c docker -f docker/null0-cart-c.Dockerfile
+# 1-time setup
+docker buildx create --name multiarch --driver docker-container --bootstrap
+docker buildx use multiarch
+docker run --privileged --rm tonistiigi/binfmt --install all
+
+# build & publish
+docker build  --push --platform linux/amd64,linux/arm64 -t konsumer/null0-cart-c docker -f docker/null0-cart-c.Dockerfile
 
 # test
 docker run -it -v ./carts/c/colorbars:/src -v ./out:/out konsumer/null0-cart-c colorbars
-
-# publish
-docker push konsumer/null0-cart-c
 ```
