@@ -7,7 +7,7 @@ jobs:
     strategy:
       matrix:
         cart:
-          - colorbar
+          - colorbars
           - example
           - gradient
           - input
