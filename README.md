@@ -75,8 +75,8 @@ npm run gen
 docker build -t konsumer/null0-cart-c . -f docker/null0-cart-c.Dockerfile
 docker build -t konsumer/null0-cart-quickjs . -f docker/null0-cart-quickjs.Dockerfile
 docker build -t konsumer/null0-cart-assemblyscript . -f docker/null0-cart-assemblyscript.Dockerfile
-
 docker build -t konsumer/null0-cart-nelua . -f docker/null0-cart-nelua.Dockerfile
+
 docker build -t konsumer/null0-cart-nim . -f docker/null0-cart-nim.Dockerfile
 docker build -t konsumer/null0-cart-zig . -f docker/null0-cart-zig.Dockerfile
 docker build -t konsumer/null0-cart-rust . -f docker/null0-cart-rust.Dockerfile
@@ -86,8 +86,8 @@ docker build -t konsumer/null0-cart-py2wasm . -f docker/null0-cart-py2wasm.Docke
 docker build  --push --platform linux/amd64,linux/arm64 -t konsumer/null0-cart-c . -f docker/null0-cart-c.Dockerfile
 docker build  --push --platform linux/amd64,linux/arm64 -t konsumer/null0-cart-quickjs . -f docker/null0-cart-quickjs.Dockerfile
 docker build  --push --platform linux/amd64,linux/arm64 -t konsumer/null0-cart-assemblyscript . -f docker/null0-cart-assemblyscript.Dockerfile
-
 docker build  --push --platform linux/amd64,linux/arm64 -t konsumer/null0-cart-nelua . -f docker/null0-cart-nelua.Dockerfile
+
 docker build  --push --platform linux/amd64,linux/arm64 -t konsumer/null0-cart-nim . -f docker/null0-cart-nim.Dockerfile
 docker build  --push --platform linux/amd64,linux/arm64 -t konsumer/null0-cart-zig . -f docker/null0-cart-zig.Dockerfile
 docker build  --push --platform linux/amd64,linux/arm64 -t konsumer/null0-cart-rust . -f docker/null0-cart-rust.Dockerfile
@@ -106,4 +106,7 @@ docker run -it -v ./carts/js/demo:/src -v ./out:/out konsumer/null0-cart-quickjs
 docker run -it -v ./carts/js/input:/src -v ./out:/out konsumer/null0-cart-quickjs input_js
 
 docker run -it -v ./carts/as/simple:/src -v ./out:/out konsumer/null0-cart-assemblyscript simple_as
+
+docker run -it -v ./carts/nelua/basic:/src -v ./out:/out konsumer/null0-cart-nelua basic_nelua
+docker run -it -v ./carts/nelua/colorbars:/src -v ./out:/out konsumer/null0-cart-nelua colorbars_nelua
 ```

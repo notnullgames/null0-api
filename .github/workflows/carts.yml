@@ -59,12 +59,30 @@ jobs:
         with:
           name: ${{ matrix.cart }}_as
           path: ${{ matrix.cart }}_as.null0
+  nelua:
+    name: Build & Publish Nelua Carts
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        cart:
+          - basic
+          - colorbars
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Build Nelua ${{ matrix.cart }} cart
+        run: docker run -v ./carts/nelua/${{ matrix.cart }}:/src -v .:/out konsumer/null0-cart-nelua ${{ matrix.cart }}_nelua
+      - name: Upload Nelua ${{ matrix.cart }} cart artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.cart }}_nelua
+          path: ${{ matrix.cart }}_nelua.null0
 
   release:
     name: Create Release
     runs-on: ubuntu-latest
     if: github.ref_type == 'tag'
-    needs: [c, js, as]
+    needs: [c, js, as, nelua]
     steps:
       - name: Download all artifacts
         uses: actions/download-artifact@v4
