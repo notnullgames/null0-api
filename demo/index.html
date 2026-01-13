@@ -34,7 +34,9 @@
   </script>
   <script type="module">
     // get list of carts
-    const carts = await fetch("carts/carts.txt")
+    const carts = await fetch(
+      "https://notnullgames.github.io/null0-api/carts/carts.txt",
+    )
       .then((r) => r.text())
       .then((t) => t.trim().split("\n"));
     console.log(carts);
