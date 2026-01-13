@@ -1,0 +1,45 @@
+-- Import the null0 API functions
+require 'null0'
+
+global function load(): void <cexport "load">
+  clear(BLACK)
+end
+
+global function update(): void <cexport "update">
+  local colors: [8]Color = {
+    WHITE, BLACK, RED, GREEN, BLUE, YELLOW, LIGHTGRAY, GRAY
+  }
+
+  local margin: int32 = 10
+  local bar_width: int32 = (SCREEN_WIDTH // 8) - margin
+  local bar_height: int32 = SCREEN_HEIGHT - (margin * 2)
+
+  -- Draw concentric circles
+  local d: int32 = SCREEN_HEIGHT // 4
+  local i: int32 = 0
+  while d > 0 do
+    d = d - bar_width
+    if i % 2 == 1 then
+      draw_circle(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2, d, WHITE)
+    else
+      draw_circle(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2, d, RED)
+    end
+    i = i + 1
+  end
+
+  -- Draw color bars
+  for x: int32 = 0, < 8 do
+    local rect_x: int32 = margin + (x * (bar_width + margin))
+    draw_rectangle(rect_x, margin, bar_width, bar_height, colors[x])
+    
+    if x == 0 then
+      draw_rectangle_outline(rect_x, margin, bar_width, bar_height, 1, WHITE)
+    else
+      draw_rectangle_outline(rect_x, margin, bar_width, bar_height, 1, LIGHTGRAY)
+    end
+  end
+end
+
+global function unload(): void <cexport "unload">
+  -- cleanup if needed
+end 

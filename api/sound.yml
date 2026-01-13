@@ -1,0 +1,48 @@
+load_sound:
+  args:
+    filename: string
+  returns: Sound
+  description: Load a sound from a file in cart.
+
+play_sound:
+  args:
+    sound: Sound
+    loop: bool
+  returns: void
+  description: Play a sound.
+
+stop_sound:
+  args:
+    sound: Sound
+  returns: void
+  description: Stop a sound.
+
+unload_sound:
+  args:
+    sound: Sound
+  returns: void
+  description: Unload a sound.
+
+tts_sound:
+  args:
+    text: string
+    phonetic: bool
+    pitch: i32
+    speed: i32
+    throat: i32
+    mouth: i32
+    sing: bool
+  returns: Sound
+  description: Speak some text and return a sound. Set things to 0 for defaults.
+
+sfx_sound:
+  args:
+    params: SfxParams
+  returns: Sound
+  description: Create Sfx sound.
+
+sfx_generate:
+  args:
+    type: SfxPresetType
+  returns: SfxParams
+  description: Create Sfx parameters.

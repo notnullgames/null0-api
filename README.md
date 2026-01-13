@@ -1,4 +1,4 @@
-The idea here is a central place for some exmaple-carts for [null0](https://github.com/notnullgames/null0). I also use this as a central place to store docker containers for building them.
+The idea here is a central place for some example-carts for [null0](https://github.com/notnullgames/null0), and the headers used to make them. I also use this as a place to store docker containers for building them.
 
 - You will need docker installed to use these, which greatly simplifies your setup.
 - volume-mount your cart in `/src`
@@ -59,8 +59,19 @@ docker buildx create --name multiarch --driver docker-container --bootstrap
 docker buildx use multiarch
 docker run --privileged --rm tonistiigi/binfmt --install all
 
-# build & publish
+# generate headers (needed on API change)
+npm i
+npm run generate
+
+# build & publish (needed on API change)
 docker build  --push --platform linux/amd64,linux/arm64 -t konsumer/null0-cart-c docker -f docker/null0-cart-c.Dockerfile
+docker build  --push --platform linux/amd64,linux/arm64 -t konsumer/null0-cart-quickjs docker -f docker/null0-cart-quickjs.Dockerfile
+docker build  --push --platform linux/amd64,linux/arm64 -t konsumer/null0-cart-nelua docker -f docker/null0-cart-nelua.Dockerfile
+docker build  --push --platform linux/amd64,linux/arm64 -t konsumer/null0-cart-assemblyscript docker -f docker/null0-cart-assemblyscript.Dockerfile
+docker build  --push --platform linux/amd64,linux/arm64 -t konsumer/null0-cart-nim docker -f docker/null0-cart-nim.Dockerfile
+docker build  --push --platform linux/amd64,linux/arm64 -t konsumer/null0-cart-zig docker -f docker/null0-cart-zig.Dockerfile
+docker build  --push --platform linux/amd64,linux/arm64 -t konsumer/null0-cart-rust docker -f docker/null0-cart-rust.Dockerfile
+docker build  --push --platform linux/amd64,linux/arm64 -t konsumer/null0-cart-py2wasm docker -f docker/null0-cart-py2wasm.Dockerfile
 
 # test
 docker run -it -v ./carts/c/colorbars:/src -v ./out:/out konsumer/null0-cart-c colorbars

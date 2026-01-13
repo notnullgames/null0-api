@@ -1,0 +1,18 @@
+{
+  "name": "null0-carts",
+  "version": "0.0.0",
+  "type": "module",
+  "private": true,
+  "author": "konsumer",
+  "license": "MIT",
+  "scripts": {
+    "gen:cart_c": "node tools/gen_cart_c.js"
+  },
+  "exports": {
+    ".": "index.js"
+  },
+  "devDependencies": {
+    "glob": "^13.0.0",
+    "yaml": "^2.8.2"
+  }
+}
