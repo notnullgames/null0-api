@@ -135,7 +135,7 @@ jobs:
           mkdir -p _site/carts/
           cp -r demo/* _site/
           cp -r artifacts/**/*.null0 _site/carts/
-          ls _site/carts/*.null0 > _site/carts/carts.txt
+          cd _site/carts/ && ls *.null0 > carts.txt
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
