@@ -32,7 +32,7 @@ This repo contains various support-things for [null0](https://github.com/notnull
 docker run -it -v .:/src -v ~/Desktop:/out konsumer/null0-cart-c tester
 ```
 
-## usage in Github CI
+## usage in Github CI to build your cart for you
 
 you can easily use it in Github Actions:
 
@@ -74,9 +74,9 @@ npm run gen
 # just local use (fast, no push)
 docker build -t konsumer/null0-cart-c . -f docker/null0-cart-c.Dockerfile
 docker build -t konsumer/null0-cart-quickjs . -f docker/null0-cart-quickjs.Dockerfile
+docker build -t konsumer/null0-cart-assemblyscript . -f docker/null0-cart-assemblyscript.Dockerfile
 
 docker build -t konsumer/null0-cart-nelua . -f docker/null0-cart-nelua.Dockerfile
-docker build -t konsumer/null0-cart-assemblyscript . -f docker/null0-cart-assemblyscript.Dockerfile
 docker build -t konsumer/null0-cart-nim . -f docker/null0-cart-nim.Dockerfile
 docker build -t konsumer/null0-cart-zig . -f docker/null0-cart-zig.Dockerfile
 docker build -t konsumer/null0-cart-rust . -f docker/null0-cart-rust.Dockerfile
@@ -85,9 +85,9 @@ docker build -t konsumer/null0-cart-py2wasm . -f docker/null0-cart-py2wasm.Docke
 # build & publish (needed on API change)
 docker build  --push --platform linux/amd64,linux/arm64 -t konsumer/null0-cart-c . -f docker/null0-cart-c.Dockerfile
 docker build  --push --platform linux/amd64,linux/arm64 -t konsumer/null0-cart-quickjs . -f docker/null0-cart-quickjs.Dockerfile
+docker build  --push --platform linux/amd64,linux/arm64 -t konsumer/null0-cart-assemblyscript . -f docker/null0-cart-assemblyscript.Dockerfile
 
 docker build  --push --platform linux/amd64,linux/arm64 -t konsumer/null0-cart-nelua . -f docker/null0-cart-nelua.Dockerfile
-docker build  --push --platform linux/amd64,linux/arm64 -t konsumer/null0-cart-assemblyscript . -f docker/null0-cart-assemblyscript.Dockerfile
 docker build  --push --platform linux/amd64,linux/arm64 -t konsumer/null0-cart-nim . -f docker/null0-cart-nim.Dockerfile
 docker build  --push --platform linux/amd64,linux/arm64 -t konsumer/null0-cart-zig . -f docker/null0-cart-zig.Dockerfile
 docker build  --push --platform linux/amd64,linux/arm64 -t konsumer/null0-cart-rust . -f docker/null0-cart-rust.Dockerfile
@@ -104,4 +104,6 @@ docker run -it -v ./carts/c/wasi_demo:/src -v ./out:/out konsumer/null0-cart-c w
 
 docker run -it -v ./carts/js/demo:/src -v ./out:/out konsumer/null0-cart-quickjs demo_js
 docker run -it -v ./carts/js/input:/src -v ./out:/out konsumer/null0-cart-quickjs input_js
+
+docker run -it -v ./carts/as/simple:/src -v ./out:/out konsumer/null0-cart-assemblyscript simple_as
 ```

@@ -42,12 +42,29 @@ jobs:
         with:
           name: ${{ matrix.cart }}_js
           path: ${{ matrix.cart }}_js.null0
+  as:
+    name: Build & Publish Assemblyscript Carts
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        cart:
+          - simple
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Build Assemblyscript ${{ matrix.cart }} cart
+        run: docker run -v ./carts/as/${{ matrix.cart }}:/src -v .:/out konsumer/null0-cart-assemblyscript ${{ matrix.cart }}_as
+      - name: Upload Assemblyscript ${{ matrix.cart }} cart artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.cart }}_as
+          path: ${{ matrix.cart }}_as.null0
 
   release:
     name: Create Release
     runs-on: ubuntu-latest
     if: github.ref_type == 'tag'
-    needs: [c, js]
+    needs: [c, js, as]
     steps:
       - name: Download all artifacts
         uses: actions/download-artifact@v4

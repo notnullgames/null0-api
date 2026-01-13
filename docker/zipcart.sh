@@ -88,5 +88,6 @@ if [ ${#FILES[@]} -eq 0 ]; then
     echo "No files to zip (all files excluded or directory empty)"
     exit 0
 else
+    echo "Adding ${FILES[@]}"
     zip "${DIR_OUT}/${CART_NAME}.null0" "${FILES[@]}"
 fi

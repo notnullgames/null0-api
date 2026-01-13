@@ -10,6 +10,7 @@ RUN apt-get update && apt-get install -y zip && rm -rf /var/lib/apt/lists/*
 
 VOLUME /src
 VOLUME /out
+WORKDIR /src
 
 ENV PATH="/opt/wasi-sdk/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 ENV CC="/opt/wasi-sdk/bin/clang"
