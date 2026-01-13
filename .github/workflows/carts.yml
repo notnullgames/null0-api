@@ -132,7 +132,7 @@ jobs:
           path: artifacts
       - name: Prepare Pages content
         run: |
-          mkdir -p _site
+          mkdir -p _site/carts/
           cp -r demo/* _site/
           cp -r artifacts/**/*.null0 _site/carts/
           ls _site/carts/*.null0 > _site/carts/carts.txt
