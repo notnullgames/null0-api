@@ -21,6 +21,9 @@ This repo contains various support-things for [null0](https://github.com/notnull
 - `konsumer/null0-cart-nelua`
 - `konsumer/null0-cart-assemblyscript`
 - `konsumer/null0-cart-nim`
+
+I haven't finished demos/headers/etc for these:
+
 - `konsumer/null0-cart-zig`
 - `konsumer/null0-cart-rust`
 - `konsumer/null0-cart-py2wasm`
@@ -76,22 +79,14 @@ docker build -t konsumer/null0-cart-c . -f docker/null0-cart-c.Dockerfile
 docker build -t konsumer/null0-cart-quickjs . -f docker/null0-cart-quickjs.Dockerfile
 docker build -t konsumer/null0-cart-assemblyscript . -f docker/null0-cart-assemblyscript.Dockerfile
 docker build -t konsumer/null0-cart-nelua . -f docker/null0-cart-nelua.Dockerfile
-
 docker build -t konsumer/null0-cart-nim . -f docker/null0-cart-nim.Dockerfile
-docker build -t konsumer/null0-cart-zig . -f docker/null0-cart-zig.Dockerfile
-docker build -t konsumer/null0-cart-rust . -f docker/null0-cart-rust.Dockerfile
-docker build -t konsumer/null0-cart-py2wasm . -f docker/null0-cart-py2wasm.Dockerfile
 
 # build & publish (needed on API change)
 docker build  --push --platform linux/amd64,linux/arm64 -t konsumer/null0-cart-c . -f docker/null0-cart-c.Dockerfile
 docker build  --push --platform linux/amd64,linux/arm64 -t konsumer/null0-cart-quickjs . -f docker/null0-cart-quickjs.Dockerfile
 docker build  --push --platform linux/amd64,linux/arm64 -t konsumer/null0-cart-assemblyscript . -f docker/null0-cart-assemblyscript.Dockerfile
 docker build  --push --platform linux/amd64,linux/arm64 -t konsumer/null0-cart-nelua . -f docker/null0-cart-nelua.Dockerfile
-
 docker build  --push --platform linux/amd64,linux/arm64 -t konsumer/null0-cart-nim . -f docker/null0-cart-nim.Dockerfile
-docker build  --push --platform linux/amd64,linux/arm64 -t konsumer/null0-cart-zig . -f docker/null0-cart-zig.Dockerfile
-docker build  --push --platform linux/amd64,linux/arm64 -t konsumer/null0-cart-rust . -f docker/null0-cart-rust.Dockerfile
-docker build  --push --platform linux/amd64,linux/arm64 -t konsumer/null0-cart-py2wasm . -f docker/null0-cart-py2wasm.Dockerfile
 
 # test
 docker run -it -v ./carts/c/colorbars:/src -v ./out:/out konsumer/null0-cart-c colorbars_c
@@ -109,4 +104,6 @@ docker run -it -v ./carts/as/simple:/src -v ./out:/out konsumer/null0-cart-assem
 
 docker run -it -v ./carts/nelua/basic:/src -v ./out:/out konsumer/null0-cart-nelua basic_nelua
 docker run -it -v ./carts/nelua/colorbars:/src -v ./out:/out konsumer/null0-cart-nelua colorbars_nelua
+
+docker run -it -v ./carts/nim/simple:/src -v ./out:/out konsumer/null0-cart-nim simple_nim
 ```
